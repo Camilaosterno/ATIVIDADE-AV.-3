@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+
+int mapearSimboloRomano(char s) {
+    switch (s) {
+        case 'I': return 1;
+        case 'V': return 5;
+        case 'X': return 10;
+        case 'L': return 50;
+        case 'C': return 100;
+        case 'D': return 500;
+        case 'M': return 1000;
+        default: return 0;
+    }
+}
+
+int converterRomanoParaDecimal(const char *simbolosRomanos) {
+    int tamSimbolos = strlen(simbolosRomanos);
+    int resultadoDec = 0;
+
+    for (int i = tamSimbolos - 1; i >= 0; i--) {
+        int valorAtual = mapearSimboloRomano(simbolosRomanos[i]);
+        int valorAnterior = (i > 0) ? mapearSimboloRomano(simbolosRomanos[i - 1]) : 0;
+        
+        resultadoDec += (valorAtual > valorAnterior) ? valorAtual : -valorAtual;
+    }
+
+    return resultadoDec;
+}
+
+void exibirFormatoBinario(int valorDecimal) {
+    printf(" em código binário: ");
+    int flag = 0;
+
+    for (int i = 11; i >= 0; i--) {
+        int bit = (valorDecimal >> i) & 1;
+        if (bit == 1 || flag == 1) {
+            printf("%d", bit);
+            flag = 1;
+        }
+    }
+    printf("%s\n", (flag == 0) ? "0" : "");
+}
+
+int main() {
+    char simbolosRomanos[13];
+    printf("Digite uma expressão em caracteres romanos: ");
+    scanf("%s", simbolosRomanos);
+
+    int valorDecimal = converterRomanoParaDecimal(simbolosRomanos);
+
+    printf("Expressão em Caracteres Romanos: %s", simbolosRomanos);
+    exibirFormatoBinario(valorDecimal);
+
+    printf(" em sistema decimal: %d\n", valorDecimal);
+    
+    printf("Representação Hexadecimal: %x\n", valorDecimal);
+
+    return 0;
+}
