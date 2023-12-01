@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int mapearSimboloRomano(char s) {
+int mapSymbol(int s) {
     switch (s) {
         case 'I': return 1;
         case 'V': return 5;
@@ -14,26 +14,26 @@ int mapearSimboloRomano(char s) {
     }
 }
 
-int converterRomanoParaDecimal(const char *simbolosRomanos) {
-    int tamSimbolos = strlen(simbolosRomanos);
-    int resultadoDec = 0;
+int convertToDecimal(const char *symbols) {
+    int length = strlen(symbols);
+    int result = 0;
 
-    for (int i = tamSimbolos - 1; i >= 0; i--) {
-        int valorAtual = mapearSimboloRomano(simbolosRomanos[i]);
-        int valorAnterior = (i > 0) ? mapearSimboloRomano(simbolosRomanos[i - 1]) : 0;
+    for (int i = length - 1; i >= 0; i--) {
+        int current = mapSymbol(symbols[i]);
+        int previous = (i > 0) ? mapSymbol(symbols[i - 1]) : 0;
         
-        resultadoDec += (valorAtual > valorAnterior) ? valorAtual : -valorAtual;
+        result += (current > previous) ? current : -current;
     }
 
-    return resultadoDec;
+    return result;
 }
 
-void exibirFormatoBinario(int valorDecimal) {
-    printf(" em código binário: ");
+void displayBinary(int decimal) {
+    printf(" in binary: ");
     int flag = 0;
 
     for (int i = 11; i >= 0; i--) {
-        int bit = (valorDecimal >> i) & 1;
+        int bit = (decimal >> i) & 1;
         if (bit == 1 || flag == 1) {
             printf("%d", bit);
             flag = 1;
@@ -43,18 +43,18 @@ void exibirFormatoBinario(int valorDecimal) {
 }
 
 int main() {
-    char simbolosRomanos[13];
-    printf("Digite uma expressão em caracteres romanos: ");
-    scanf("%s", simbolosRomanos);
+    char symbols[13];
+    printf("Enter a set of symbols: ");
+    scanf("%s", symbols);
 
-    int valorDecimal = converterRomanoParaDecimal(simbolosRomanos);
+    int decimalValue = convertToDecimal(symbols);
 
-    printf("Expressão em Caracteres Romanos: %s", simbolosRomanos);
-    exibirFormatoBinario(valorDecimal);
+    printf("Symbol Set: %s", symbols);
+    displayBinary(decimalValue);
 
-    printf(" em sistema decimal: %d\n", valorDecimal);
+    printf(" in decimal system: %d\n", decimalValue);
     
-    printf("Representação Hexadecimal: %x\n", valorDecimal);
+    printf("Hexadecimal Representation: %x\n", decimalValue);
 
     return 0;
 }
