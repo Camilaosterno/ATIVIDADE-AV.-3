@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char placaVeiculo[10];
+    char diaDaSemana[30];
+
+    printf("Digite a placa do veiculo: ");
+    scanf("%s", placaVeiculo);
+
+    printf("Informe o dia da semana: ");
+    scanf("%s", diaDaSemana);
+
+    if ((strlen(placaVeiculo) == 8 && placaVeiculo[3] == '-' && isalpha(placaVeiculo[0]) && isalpha(placaVeiculo[1]) && isalpha(placaVeiculo[2]) && isdigit(placaVeiculo[4]) && isdigit(placaVeiculo[5]) && isdigit(placaVeiculo[6]) && isdigit(placaVeiculo[7])) ||
+        (strlen(placaVeiculo) == 7 && isalpha(placaVeiculo[0]) && isalpha(placaVeiculo[1]) && isalpha(placaVeiculo[2]) && isdigit(placaVeiculo[3]) && isalpha(placaVeiculo[4]) && isdigit(placaVeiculo[5]) && isdigit(placaVeiculo[6]))) {
+
+        char ultimoDigitoPlaca = placaVeiculo[strlen(placaVeiculo) - 1];
+
+        if (strcmp(diaDaSemana, "SEGUNDA-FEIRA") == 0) {
+            if (ultimoDigitoPlaca == '0' || ultimoDigitoPlaca == '1') {
+                printf("O veiculo de placa %s nao pode circular na segunda-feira.\n", placaVeiculo);
+            } else {
+                printf("O veiculo de placa %s pode circular na segunda-feira.\n", placaVeiculo);
+            }
+        } else if (strcmp(diaDaSemana, "TERCA-FEIRA") == 0) {
+            if (ultimoDigitoPlaca == '2' || ultimoDigitoPlaca == '3') {
+                printf("Na terca-feira, o veiculo de placa %s nao pode circular.\n", placaVeiculo);
+            } else {
+                printf("Na terca-feira, o veiculo de placa %s pode circular.\n", placaVeiculo);
+            }
+        } else if (strcmp(diaDaSemana, "QUARTA-FEIRA") == 0) {
+            if (ultimoDigitoPlaca == '4' || ultimoDigitoPlaca == '5') {
+                printf("Quarta-feira e dia de descanso para o veiculo de placa %s.\n", placaVeiculo);
+            } else {
+                printf("O veiculo de placa %s pode circular na quarta-feira.\n", placaVeiculo);
+            }
+        } else if (strcmp(diaDaSemana, "QUINTA-FEIRA") == 0) {
+            if (ultimoDigitoPlaca == '6' || ultimoDigitoPlaca == '7') {
+                printf("O veiculo de placa %s nao pode circular na quinta-feira.\n", placaVeiculo);
+            } else {
+                printf("O veiculo de placa %s pode circular na quinta-feira.\n", placaVeiculo);
+            }
+        } else if (strcmp(diaDaSemana, "SEXTA-FEIRA") == 0) {
+            if (ultimoDigitoPlaca == '8' || ultimoDigitoPlaca == '9') {
+                printf("Na sexta-feira, o veiculo de placa %s nao pode circular.\n", placaVeiculo);
+            } else {
+                printf("Na sexta-feira, o veiculo de placa %s pode circular.\n", placaVeiculo);
+            }
+        } else if (strcmp(diaDaSemana, "SABADO") == 0 || strcmp(diaDaSemana, "DOMINGO") == 0) {
+            printf("Nao ha restricoes durante o fim de semana para o veiculo de placa %s.\n", placaVeiculo);
+        } else {
+            printf("Dia da semana invalido para o veiculo de placa %s.\n", placaVeiculo);
+        }
+    } else {
+        printf("Placa invalida para o dia da semana %s.\n", diaDaSemana);
+        if (strcmp(diaDaSemana, "SEGUNDA-FEIRA") != 0 &&
+            strcmp(diaDaSemana, "TERCA-FEIRA") != 0 &&
+            strcmp(diaDaSemana, "QUARTA-FEIRA") != 0 &&
+            strcmp(diaDaSemana, "QUINTA-FEIRA") != 0 &&
+            strcmp(diaDaSemana, "SEXTA-FEIRA") != 0 &&
+            strcmp(diaDaSemana, "SABADO") != 0 &&
+            strcmp(diaDaSemana, "DOMINGO") != 0) {
+            printf("Dia da semana invalido para o veiculo de placa %s.\n", placaVeiculo);
+        }
+    }
+
+    return 0;
+}
