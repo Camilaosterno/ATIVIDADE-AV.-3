@@ -2,24 +2,21 @@
 #include <math.h>
 
 int main() {
-    double monthlyContribution, interestRate;
-    int monthsToConsider;
+    int numMonths;
+    double contribuicaoBeneficio, taxaJuros;
 
-    printf("Enter the value of the monthly contribution (in Brazilian Reais): R$ ");
-    scanf("%lf", &monthlyContribution);
+    scanf("%d", &numMonths);
+    scanf("%lf", &contribuicaoBeneficio);
+    
+  
+scanf("%lf", &taxaJuros);
 
-    printf("How many months do you want to consider? ");
-    scanf("%d", &monthsToConsider);
+    double montante = 0.0;
 
-    printf("Enter the monthly interest rate (in decimal): ");
-    scanf("%lf", &interestRate);
+    for (int mes = 1; mes <= numMonths; mes++) {
+        montante += contribuicaoBeneficio * pow((1 + taxaJuros), mes);
 
-    double accumulatedTotal = 0.0;
-
-    for (int currentMonth = 1; currentMonth <= monthsToConsider; currentMonth++) {
-        accumulatedTotal = (accumulatedTotal + monthlyContribution) * (1 + interestRate);
-
-        printf("Accumulated total at the end of month %d: R$ %.2f\n", currentMonth, accumulatedTotal);
+        printf("Montante ao fim do mes %d: R$ %.2f\n", mes, montante);
     }
 
     return 0;
